@@ -3,11 +3,11 @@ const cloudinary = require('cloudinary')
 function hexToHSL(H) {
     // Convert hex to RGB first
     let r = 0, g = 0, b = 0;
-    if (H.length == 4) {
+    if (H.length >= 4 && H.length < 7) {
         r = "0x" + H[1] + H[1];
         g = "0x" + H[2] + H[2];
         b = "0x" + H[3] + H[3];
-    } else if (H.length == 7) {
+    } else {
         r = "0x" + H[1] + H[2];
         g = "0x" + H[3] + H[4];
         b = "0x" + H[5] + H[6];
@@ -64,7 +64,7 @@ exports.handler = async (event, context) => {
                 overlay: {font_family: "Montserrat",
                 font_size: Math.min(50, Math.max(height/10, width/10)),
                 text: `${width} x ${height}`},
-                color: hexToHSL(`#${background}`)[2] < 50 ? "#fff" : "#000"
+                color: hexToHSL(`#${background}`)[2] < 50 ? "#ffffff80" : "#00000080"
             },
             {flags: "layer_apply"}
         ]
